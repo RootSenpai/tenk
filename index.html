@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>discord.gg/tenk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="https://media.tenor.com/aDozr1-R2n0AAAAi/bitcoin.gif" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #141414;
+            --accent-color: #8B5CF6;
+            --text-color: #ffffff;
+            --gradient-start: #4F46E5;
+            --gradient-end: #9333EA;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .ultra-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .ultra-glass:hover {
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: all 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .password-feedback, .username-feedback {
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .valid {
+            color: #22c55e;
+        }
+
+        .invalid {
+            color: #dc2626;
+        }
+
+        #register-message {
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .success {
+            background-color: #22c55e;
+            color: white;
+        }
+
+        .failure {
+            background-color: #dc2626;
+            color: white;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <nav class="fixed w-full z-50 p-4">
+        <div class="container mx-auto">
+            <div class="ultra-glass flex justify-center items-center px-8 py-4 rounded-full">
+                <a href="/" class="text-3xl font-bold gradient-text">SR LOSS PREVENTION - REGISTRATION</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center px-4 mt-20">
+        <div class="ultra-glass p-8 w-full max-w-md" data-aos="fade-up">
+            <h1 id="form-title" class="text-3xl font-bold mb-6 text-center gradient-text">Register</h1>
+            
+            <form id="register-form" class="space-y-4">
+                <div class="relative">
+                    <iconify-icon icon="mdi:account-plus" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></iconify-icon>
+                    <input type="text" id="reg-username" name="username" placeholder="Username" class="w-full pl-10 pr-4 py-2 bg-black bg-opacity-10 text-white border border-gray-700 rounded-md focus:outline-none focus:border-accent-color transition-colors" required minlength="4">
+                </div>
+                <div id="username-feedback" class="username-feedback"></div>
+
+                <div class="relative">
+                    <iconify-icon icon="mdi:lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></iconify-icon>
+                    <input type="password" id="reg-password" name="password" placeholder="Password" class="w-full pl-10 pr-4 py-2 bg-black bg-opacity-10 text-white border border-gray-700 rounded-md focus:outline-none focus:border-accent-color transition-colors" required>
+                </div>
+                <div id="password-feedback" class="password-feedback"></div>
+                
+                <div class="relative">
+                    <iconify-icon icon="mdi:key" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></iconify-icon>
+                    <input type="text" id="reg-key" name="key" placeholder="Key" class="w-full pl-10 pr-4 py-2 bg-black bg-opacity-10 text-white border border-gray-700 rounded-md focus:outline-none focus:border-accent-color transition-colors" required>
+                </div>
+                <div class="flex justify-center items-center h-full">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAA1P46KYPXFWnki0"></div>
+                </div>
+                <button id="register-button" type="submit" class="btn w-full py-2 px-4 gradient-bg text-white rounded-md hover:opacity-90 transition-colors opacity-50 cursor-not-allowed" disabled>Register</button>
+
+                <div id="register-message" class="mt-4 text-center text-sm hidden">
+                    <span id="register-message-text"></span>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        const usernameInput = document.getElementById('reg-username');
+        const passwordInput = document.getElementById('reg-password');
+        const keyInput = document.getElementById('reg-key');
+        const usernameFeedback = document.getElementById('username-feedback');
+        const passwordFeedback = document.getElementById('password-feedback');
+        const registerForm = document.getElementById('register-form');
+        const registerMessage = document.getElementById('register-message');
+        const registerMessageText = document.getElementById('register-message-text');
+        const registerButton = document.getElementById('register-button');
+
+        const forbiddenChars = /[\'\"<>{};\s]/;
+
+        let isUsernameValid = false;
+        let isPasswordValid = false;
+        let isKeyValid = false;
+
+        function showRegisterMessage(message, isSuccess) {
+            registerMessage.classList.remove('hidden');
+            registerMessageText.textContent = message;
+
+            registerMessage.classList.remove('success', 'failure');
+            
+            if (isSuccess) {
+                registerMessage.classList.add('success');
+            } else {
+                registerMessage.classList.add('failure');
+            }
+
+            setTimeout(() => {
+                registerMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        function checkUsernameValidity(username) {
+            if (forbiddenChars.test(username)) {
+                usernameFeedback.innerHTML = '<span class="invalid">❌ Username contains invalid characters.</span>';
+                isUsernameValid = false;
+            } else if (username.length >= 4) {
+                usernameFeedback.innerHTML = '<span class="valid">✔️ Username is valid!</span>';
+                isUsernameValid = true;
+            } else {
+                usernameFeedback.innerHTML = '<span class="invalid">❌ Username must be at least 4 characters long.</span>';
+                isUsernameValid = false;
+            }
+            toggleRegisterButton();
+        }
+
+        function checkPasswordValidity(password) {
+            if (forbiddenChars.test(password)) {
+                passwordFeedback.innerHTML = '<span class="invalid">❌ Password contains invalid characters.</span>';
+                isPasswordValid = false;
+            } else {
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasNumber = /\d/.test(password);
+                const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+                const isValid = hasUpperCase && hasNumber && hasSpecialChar;
+
+                if (isValid) {
+                    passwordFeedback.innerHTML = '<span class="valid">✔️ Password is valid!</span>';
+                    isPasswordValid = true;
+                } else {
+                    passwordFeedback.innerHTML = '<span class="invalid">❌ Password must include at least one uppercase letter, one number, and one special character.</span>';
+                    isPasswordValid = false;
+                }
+            }
+            toggleRegisterButton();
+        }
+
+        function checkKeyValidity(key) {
+            if (forbiddenChars.test(key)) {
+                keyFeedback.innerHTML = '<span class="invalid">❌ Key contains invalid characters.</span>';
+                isKeyValid = false;
+            } else {
+                isKeyValid = true;
+            }
+            toggleRegisterButton();
+        }
+
+        function toggleRegisterButton() {
+            if (isUsernameValid && isPasswordValid && isKeyValid) {
+                registerButton.disabled = false;
+                registerButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                registerButton.classList.add('opacity-100', 'cursor-pointer');
+            } else {
+                registerButton.disabled = true;
+                registerButton.classList.remove('opacity-100', 'cursor-pointer');
+                registerButton.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        usernameInput.addEventListener('input', (e) => {
+            checkUsernameValidity(e.target.value);
+        });
+
+        passwordInput.addEventListener('input', (e) => {
+            checkPasswordValidity(e.target.value);
+        });
+
+        keyInput.addEventListener('input', (e) => {
+            checkKeyValidity(e.target.value);
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            registerButton.innerHTML = `<div class="loading"><div class="spinner"></div></div> Registering...`;
+            registerButton.disabled = true;
+
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            const key = keyInput.value;
+            const formData = new FormData(registerForm);
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                console.log(result);
+
+                if (response.status === 200) {
+                    showRegisterMessage(result.success, true);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 10000);
+                } else {
+                    console.error('Register error:', result);
+                    showRegisterMessage('Registration failed: ' + (result.error || 'Unknown error'), false);
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                showRegisterMessage('An error occurred during registration.', false);
+            } finally {
+                registerButton.disabled = false;
+                registerButton.innerHTML = 'Register';
+            }
+        });
+    });
+    </script>
+</body>
+</html>
