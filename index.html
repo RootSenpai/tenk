@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="https://media.tenor.com/aDozr1-R2n0AAAAi/bitcoin.gif" type="image/png">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         
@@ -23,10 +24,22 @@
             --gradient-end: #9333EA;
         }
 
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--primary-bg);
             color: var(--text-color);
+            margin: 0;
+            padding: 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -87,7 +100,7 @@
             left: 100%;
         }
 
-        .password-feedback, .username-feedback {
+        .password-feedback, .username-feedback, .key-feedback {
             margin-top: 8px;
             font-size: 14px;
         }
@@ -139,6 +152,7 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
+
     <nav class="fixed w-full z-50 p-4">
         <div class="container mx-auto">
             <div class="ultra-glass flex justify-center items-center px-8 py-4 rounded-full">
@@ -168,6 +182,7 @@
                     <iconify-icon icon="mdi:key" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></iconify-icon>
                     <input type="text" id="reg-key" name="key" placeholder="Key" class="w-full pl-10 pr-4 py-2 bg-black bg-opacity-10 text-white border border-gray-700 rounded-md focus:outline-none focus:border-accent-color transition-colors" required>
                 </div>
+                <div id="key-feedback" class="key-feedback"></div>
                 <div class="flex justify-center items-center h-full">
                     <div class="cf-turnstile" data-sitekey="0x4AAAAAAA1P46KYPXFWnki0"></div>
                 </div>
@@ -192,6 +207,7 @@
         const keyInput = document.getElementById('reg-key');
         const usernameFeedback = document.getElementById('username-feedback');
         const passwordFeedback = document.getElementById('password-feedback');
+        const keyFeedback = document.getElementById('key-feedback')
         const registerForm = document.getElementById('register-form');
         const registerMessage = document.getElementById('register-message');
         const registerMessageText = document.getElementById('register-message-text');
@@ -217,51 +233,80 @@
 
             setTimeout(() => {
                 registerMessage.classList.add('hidden');
-            }, 5000);
+            }, 10000);
         }
 
         function checkUsernameValidity(username) {
-            if (forbiddenChars.test(username)) {
+            const forbiddenChars = /[^a-z0-9]/;
+            const hasUpperCase = /[A-Z]/;
+
+            usernameFeedback.innerHTML = '';
+
+            if (hasUpperCase.test(username)) {
+                usernameFeedback.innerHTML = '<span class="invalid">❌ Username contains capital letters.</span>';
+                isUsernameValid = false;
+            } else if (forbiddenChars.test(username)) {
                 usernameFeedback.innerHTML = '<span class="invalid">❌ Username contains invalid characters.</span>';
                 isUsernameValid = false;
-            } else if (username.length >= 4) {
+            } else if (username.length >= 4 && username.length <= 10) {
                 usernameFeedback.innerHTML = '<span class="valid">✔️ Username is valid!</span>';
                 isUsernameValid = true;
-            } else {
+            } else if (username.length < 4) {
                 usernameFeedback.innerHTML = '<span class="invalid">❌ Username must be at least 4 characters long.</span>';
                 isUsernameValid = false;
+            } else {
+                usernameFeedback.innerHTML = '<span class="invalid">❌ Username must not exceed 10 characters.</span>';
+                isUsernameValid = false;
             }
+
             toggleRegisterButton();
         }
+
+
 
         function checkPasswordValidity(password) {
             if (forbiddenChars.test(password)) {
                 passwordFeedback.innerHTML = '<span class="invalid">❌ Password contains invalid characters.</span>';
                 isPasswordValid = false;
-            } else {
+            } 
+            else if (password.length < 6) {
+                passwordFeedback.innerHTML = '<span class="invalid">❌ Password must be at least 6 characters long.</span>';
+                isPasswordValid = false;
+            } 
+            else if (password.length > 32) {
+                passwordFeedback.innerHTML = '<span class="invalid">❌ Password must not exceed 32 characters.</span>';
+                isPasswordValid = false;
+            } 
+            else {
                 const hasUpperCase = /[A-Z]/.test(password);
                 const hasNumber = /\d/.test(password);
                 const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+
                 const isValid = hasUpperCase && hasNumber && hasSpecialChar;
 
-                if (isValid) {
-                    passwordFeedback.innerHTML = '<span class="valid">✔️ Password is valid!</span>';
-                    isPasswordValid = true;
-                } else {
-                    passwordFeedback.innerHTML = '<span class="invalid">❌ Password must include at least one uppercase letter, one number, and one special character.</span>';
-                    isPasswordValid = false;
-                }
+            if (isValid) {
+                passwordFeedback.innerHTML = '<span class="valid">✔️ Password is valid!</span>';
+                isPasswordValid = true;
+            } 
+            else {
+                passwordFeedback.innerHTML = '<span class="invalid">❌ Password must include at least one uppercase letter, one number, and one special character.</span>';
+                isPasswordValid = false;
             }
+        }
             toggleRegisterButton();
         }
 
         function checkKeyValidity(key) {
-            if (forbiddenChars.test(key)) {
-                keyFeedback.innerHTML = '<span class="invalid">❌ Key contains invalid characters.</span>';
+            const keyPattern = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+
+            if (!keyPattern.test(key)) {
+                keyFeedback.innerHTML = '<span class="invalid">❌ Key must be in the format XXXX-XXXX-XXXX, containing only uppercase letters and numbers.</span>';
                 isKeyValid = false;
             } else {
+                keyFeedback.innerHTML = '<span class="valid">✔️ Key format is valid!</span>';
                 isKeyValid = true;
             }
+
             toggleRegisterButton();
         }
 
