@@ -1,170 +1,1140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="cryptomus" content="285a54ae" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to xmarket, the first modern Discord market bot for effortless browsing and automated delivery of products.">
-    <title>xmarket - Your Discord Market Bot</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#071014">
+    <title>ClearVault Discord</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+      :root {
+        --bg: #071014;
+        --bg-2: #0c1718;
+        --panel: rgba(10, 18, 20, 0.78);
+        --line: rgba(255, 255, 255, 0.14);
+        --line-strong: rgba(0, 217, 245, 0.42);
+        --text: #f5fbfc;
+        --muted: #a8bdc2;
+        --brand: #00d9f5;
+        --green: #21d18b;
+        --gold: #f1c94b;
+        --red: #ff5d73;
+        --discord: #5865f2;
+        --shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+      }
 
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #1e90ff, #121212);
-            color: #f5f5f5;
-            overflow-x: hidden;
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background: var(--bg);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        background:
+          linear-gradient(180deg, rgba(7, 16, 20, 0.24), #071014 70%),
+          linear-gradient(90deg, rgba(0, 217, 245, 0.10), rgba(255, 93, 115, 0.10)),
+          url("clear bot/discord_bot/assets/renderers/valorant_showcase_bg.png") right top / 58rem auto no-repeat,
+          url("clear bot/discord_bot/assets/renderers/fortnite_showcase_bg.png") left 18rem / 70rem auto no-repeat,
+          #071014;
+        animation: backgroundDrift 20s ease-in-out infinite alternate;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 70px 70px;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), transparent 78%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(7, 16, 20, 0.82);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(0, 217, 245, 0.20), rgba(33, 209, 139, 0.12)),
+          rgba(255, 255, 255, 0.06);
+        box-shadow: 0 0 28px rgba(0, 217, 245, 0.18);
+      }
+
+      .brand-mark span {
+        width: 16px;
+        height: 19px;
+        border: 2px solid var(--brand);
+        border-top: 6px solid var(--brand);
+        border-radius: 3px;
+        position: relative;
+      }
+
+      .brand-mark span::before {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 10px;
+        left: 50%;
+        top: -13px;
+        transform: translateX(-50%);
+        border: 2px solid var(--brand);
+        border-bottom: 0;
+        border-radius: 9px 9px 0 0;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-links a {
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 0.93rem;
+        transition: color 180ms ease, background 180ms ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 46px;
+        padding: 0 18px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.07);
+        font-weight: 800;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.30);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .button.primary {
+        border-color: rgba(0, 217, 245, 0.55);
+        background: linear-gradient(135deg, rgba(0, 217, 245, 0.98), rgba(33, 209, 139, 0.95));
+        color: #041113;
+      }
+
+      .button.discord {
+        border-color: rgba(88, 101, 242, 0.58);
+        background: rgba(88, 101, 242, 0.20);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 86svh;
+        display: grid;
+        align-items: center;
+        padding: 78px 0 54px;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(90deg, rgba(7, 16, 20, 0.95) 0%, rgba(7, 16, 20, 0.66) 42%, rgba(7, 16, 20, 0.12) 100%),
+          url("clear bot/discord_bot/assets/clear_vault_banner.gif") center 20% / min(92vw, 1000px) auto no-repeat;
+        opacity: 0.88;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 36%;
+        z-index: -1;
+        background: linear-gradient(180deg, transparent, var(--bg));
+      }
+
+      .hero-content {
+        width: min(760px, 100%);
+        padding-top: 22px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 20px;
+        padding: 8px 11px;
+        border: 1px solid rgba(0, 217, 245, 0.28);
+        border-radius: 999px;
+        color: #dffbff;
+        background: rgba(0, 217, 245, 0.09);
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 20px rgba(33, 209, 139, 0.92);
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 10ch;
+        font-size: clamp(4.4rem, 15vw, 9.8rem);
+        line-height: 0.82;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .hero-copy {
+        max-width: 670px;
+        margin: 26px 0 0;
+        color: #d4e5e8;
+        font-size: clamp(1.08rem, 1.8vw, 1.38rem);
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .status-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 46px;
+        max-width: 760px;
+      }
+
+      .status {
+        min-height: 92px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(7, 16, 20, 0.58);
+        backdrop-filter: blur(12px);
+      }
+
+      .status strong {
+        display: block;
+        font-size: clamp(1.35rem, 3vw, 2.1rem);
+        line-height: 1;
+      }
+
+      .status span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .command-dock {
+        position: absolute;
+        right: max(24px, calc((100vw - 1180px) / 2));
+        bottom: 76px;
+        width: min(405px, 36vw);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        background: rgba(7, 16, 20, 0.76);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+        overflow: hidden;
+        animation: dockFloat 6s ease-in-out infinite;
+      }
+
+      .dock-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 13px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+        color: #d9faff;
+        font-weight: 850;
+      }
+
+      .dock-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--green);
+        font-size: 0.82rem;
+      }
+
+      .dock-status::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .command-list {
+        display: grid;
+        gap: 10px;
+        padding: 14px;
+      }
+
+      .command {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .command code {
+        color: #e9feff;
+        font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+        font-size: 0.92rem;
+      }
+
+      .command small {
+        color: var(--muted);
+      }
+
+      .pill {
+        padding: 5px 8px;
+        border-radius: 999px;
+        color: #061014;
+        background: var(--brand);
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      section {
+        position: relative;
+        padding: 82px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 28px;
+        margin-bottom: 28px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--brand);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      h2 {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(2rem, 4vw, 3.65rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .section-copy {
+        margin: 0;
+        max-width: 480px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .feature-card,
+      .platform-card,
+      .command-card {
+        position: relative;
+        min-height: 188px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.055);
+        overflow: hidden;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.20);
+        transform: translateY(18px);
+        opacity: 0;
+        transition:
+          opacity 600ms ease,
+          transform 600ms ease,
+          border-color 180ms ease,
+          background 180ms ease;
+      }
+
+      .feature-card.is-visible,
+      .platform-card.is-visible,
+      .command-card.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .feature-card::after,
+      .platform-card::after,
+      .command-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        transform: translateX(-120%);
+        transition: transform 700ms ease;
+      }
+
+      .feature-card:hover,
+      .platform-card:hover,
+      .command-card:hover {
+        border-color: rgba(0, 217, 245, 0.36);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .feature-card:hover::after,
+      .platform-card:hover::after,
+      .command-card:hover::after {
+        transform: translateX(120%);
+      }
+
+      .feature-icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        color: #061014;
+        background: var(--brand);
+        font-weight: 950;
+      }
+
+      .feature-card:nth-child(2) .feature-icon,
+      .feature-card:nth-child(5) .feature-icon {
+        background: var(--green);
+      }
+
+      .feature-card:nth-child(3) .feature-icon {
+        background: var(--gold);
+      }
+
+      .feature-card:nth-child(4) .feature-icon,
+      .feature-card:nth-child(6) .feature-icon {
+        background: var(--red);
+        color: #fff;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1.08rem;
+        letter-spacing: 0;
+      }
+
+      .feature-card p,
+      .platform-card p,
+      .command-card p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .market-band {
+        background:
+          linear-gradient(180deg, rgba(12, 23, 24, 0.92), rgba(7, 16, 20, 0.95)),
+          url("clear bot/discord_bot/assets/renderers/fortnite_showcase_bg.png") center / cover no-repeat;
+      }
+
+      .platform-grid {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .platform-card {
+        min-height: 258px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        isolation: isolate;
+      }
+
+      .platform-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background: linear-gradient(180deg, transparent 8%, rgba(0, 0, 0, 0.84) 70%);
+      }
+
+      .platform-card.fortnite {
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82)),
+          url("clear bot/discord_bot/assets/renderers/fortnite_total_icon.png") center top / auto 100% no-repeat,
+          rgba(255, 255, 255, 0.06);
+      }
+
+      .platform-card.valorant {
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82)),
+          url("clear bot/discord_bot/assets/renderers/valorant_total_icon.png") center top / auto 100% no-repeat,
+          rgba(255, 255, 255, 0.06);
+      }
+
+      .platform-card.minecraft {
+        background:
+          linear-gradient(135deg, rgba(33, 209, 139, 0.28), rgba(7, 16, 20, 0.84)),
+          rgba(255, 255, 255, 0.06);
+      }
+
+      .platform-card.steam {
+        background:
+          linear-gradient(135deg, rgba(0, 217, 245, 0.24), rgba(7, 16, 20, 0.86)),
+          rgba(255, 255, 255, 0.06);
+      }
+
+      .platform-card.discord-market {
+        background:
+          linear-gradient(135deg, rgba(88, 101, 242, 0.36), rgba(7, 16, 20, 0.86)),
+          rgba(255, 255, 255, 0.06);
+      }
+
+      .platform-card.vpn {
+        background:
+          linear-gradient(135deg, rgba(241, 201, 75, 0.28), rgba(7, 16, 20, 0.86)),
+          rgba(255, 255, 255, 0.06);
+      }
+
+      .platform-label {
+        display: inline-flex;
+        align-self: flex-start;
+        margin-bottom: 12px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        color: #061014;
+        background: #fff;
+        font-size: 0.72rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .workflow {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .command-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .command-card {
+        min-height: 156px;
+      }
+
+      .command-card code {
+        display: inline-flex;
+        padding: 7px 9px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        color: var(--brand);
+        background: rgba(0, 217, 245, 0.08);
+        font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .preview-stack {
+        position: relative;
+        min-height: 420px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(7, 16, 20, 0.20), rgba(7, 16, 20, 0.88)),
+          url("clear bot/discord_bot/assets/renderers/valorant_showcase_bg.png") center / cover no-repeat;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .preview-stack::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, transparent 0 48%, rgba(0, 217, 245, 0.20) 49%, transparent 50%),
+          linear-gradient(180deg, transparent, rgba(7, 16, 20, 0.92));
+        background-size: 190% 100%, auto;
+        animation: scan 4.8s linear infinite;
+      }
+
+      .preview-card {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        background: rgba(7, 16, 20, 0.76);
+        backdrop-filter: blur(14px);
+      }
+
+      .preview-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .preview-metrics div {
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .preview-metrics strong {
+        display: block;
+        font-size: 1.28rem;
+      }
+
+      .preview-metrics span {
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .cta-band {
+        padding: 76px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        background:
+          linear-gradient(90deg, rgba(0, 217, 245, 0.16), rgba(33, 209, 139, 0.10), rgba(255, 93, 115, 0.11)),
+          rgba(255, 255, 255, 0.035);
+      }
+
+      .cta-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+      }
+
+      .cta-layout h2 {
+        max-width: 740px;
+      }
+
+      footer {
+        padding: 30px 0;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(3, 8, 10, 0.72);
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 650ms ease, transform 650ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes backgroundDrift {
+        from {
+          background-position: center, center, right top, left 18rem, center;
+        }
+        to {
+          background-position: center, center, calc(100% + 36px) 16px, -32px 20rem, center;
+        }
+      }
+
+      @keyframes dockFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+
+      @keyframes scan {
+        from {
+          background-position: -90% 0, 0 0;
+        }
+        to {
+          background-position: 180% 0, 0 0;
+        }
+      }
+
+      @media (max-width: 1020px) {
+        .command-dock {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          width: 100%;
+          max-width: 660px;
+          margin-top: 36px;
         }
 
-        header {
-            background: #1e90ff;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: slide-down 1s ease;
+        .hero {
+          min-height: auto;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 3.5rem;
-            letter-spacing: 2px;
+        .feature-grid,
+        .platform-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        header p {
-            margin: 0.5rem 0 0;
-            font-size: 1.5rem;
+        .workflow {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .shell {
+          width: min(100% - 28px, 1180px);
         }
 
-        main {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            animation: fade-in 1.5s ease;
+        .nav {
+          min-height: auto;
+          padding: 14px 0;
+          align-items: flex-start;
+          flex-direction: column;
         }
 
-        section {
-            margin-bottom: 3rem;
+        .nav-links {
+          width: 100%;
+          overflow-x: auto;
+          padding-bottom: 2px;
         }
 
-        section h2 {
-            color: #1e90ff;
-            font-size: 2rem;
-            border-bottom: 2px solid #1e90ff;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
+        .hero {
+          padding: 56px 0 42px;
         }
 
-        section p, section ul {
-            font-size: 1.1rem;
-            line-height: 1.6;
+        .hero::before {
+          background:
+            linear-gradient(180deg, rgba(7, 16, 20, 0.66), rgba(7, 16, 20, 0.98) 82%),
+            url("clear bot/discord_bot/assets/clear_vault_banner.gif") center top / 780px auto no-repeat;
         }
 
-        section ul {
-            list-style-type: disc;
-            margin-left: 2rem;
+        h1 {
+          max-width: 100%;
+          font-size: clamp(3.3rem, 19vw, 5.4rem);
         }
 
-        .cta {
-            text-align: center;
-            margin-top: 2rem;
+        .hero-copy {
+          font-size: 1rem;
         }
 
-        .cta a {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #1e90ff;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 0.5rem;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+        .status-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 30px;
         }
 
-        .cta a:hover {
-            background-color: #0f74d0;
-            transform: scale(1.1);
+        .section-head,
+        .cta-layout {
+          align-items: flex-start;
+          flex-direction: column;
         }
 
-        .discord-widget {
-            margin-top: 2rem;
-            text-align: center;
+        .feature-grid,
+        .platform-grid,
+        .command-grid {
+          grid-template-columns: 1fr;
         }
 
-        iframe {
-            width: 350px;
-            height: 500px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: fade-in 2s ease;
+        .platform-card {
+          min-height: 220px;
         }
 
-        footer {
-            background-color: #1e1e1e;
-            color: #f5f5f5;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-            font-size: 0.9rem;
+        .preview-stack {
+          min-height: 360px;
         }
 
-        @keyframes slide-down {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(0);
-            }
+        .preview-card {
+          left: 14px;
+          right: 14px;
+          bottom: 14px;
         }
+      }
 
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
         }
+      }
     </style>
-</head>
-<body>
-    <header>
-        <h1>Welcome to xmarket</h1>
-        <p>The First Discord Market Bot</p>
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="shell nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="ClearVault home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <span>ClearVault</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#markets">Markets</a>
+          <a href="#commands">Commands</a>
+          <a href="https://discord.gg/clear" target="_blank" rel="noreferrer">Join Discord</a>
+        </div>
+      </nav>
     </header>
-    <main>
-        <section>
-            <h2>About xmarket</h2>
-            <p>xmarket is revolutionizing the way Discord users browse and purchase products. As one of the first modern Discord market bots, it offers a seamless browsing experience and automated delivery of any product directly within your server.</p>
-        </section>
-        <section>
-            <h2>Features</h2>
-            <ul>
-                <li>Effortless market browsing with an intuitive interface</li>
-                <li>Automated product delivery for instant access</li>
-                <li>Secure transactions and data handling</li>
-                <li>24/7 availability and support</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Get Started</h2>
-            <p>To bring xmarket to your server and explore its capabilities you can join our server below:</p>
-            <div class="cta">
-                <a href="https://discord.gg/xmarket" target="_blank">Join Our Discord Server</a>
+
+    <main id="top">
+      <section class="hero">
+        <div class="shell">
+          <div class="hero-content reveal">
+            <p class="eyebrow">Discord marketplace live at discord.gg/clear</p>
+            <h1>ClearVault</h1>
+            <p class="hero-copy">
+              A cleaner home for the ClearVault Discord: fast market browsing, balance topups,
+              account previews, support access, refunds, booster perks, and polished game inventory
+              reports all built around the server.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://discord.gg/clear" target="_blank" rel="noreferrer">Join ClearVault</a>
+              <a class="button discord" href="#commands">View Commands</a>
             </div>
-        </section>
-        <section class="discord-widget">
-            <h2>Community Stats</h2>
-            <iframe src="https://discord.com/widget?id=1324585061223497842&theme=dark" allowtransparency="true"></iframe>
-        </section>
+            <div class="status-row" aria-label="ClearVault feature highlights">
+              <div class="status">
+                <strong>24/7</strong>
+                <span>Discord access</span>
+              </div>
+              <div class="status">
+                <strong>6+</strong>
+                <span>Market categories</span>
+              </div>
+              <div class="status">
+                <strong>FA</strong>
+                <span>Account filters</span>
+              </div>
+              <div class="status">
+                <strong>Live</strong>
+                <span>Support tools</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="command-dock" aria-label="Popular ClearVault Discord commands">
+            <div class="dock-top">
+              <span>ClearVault Bot</span>
+              <span class="dock-status">Online</span>
+            </div>
+            <div class="command-list">
+              <div class="command">
+                <code>/market</code>
+                <small>Browse all platforms</small>
+                <span class="pill">Core</span>
+              </div>
+              <div class="command">
+                <code>/fortnite</code>
+                <small>Search by items and stats</small>
+                <span class="pill">OG</span>
+              </div>
+              <div class="command">
+                <code>/valorant</code>
+                <small>Filter skins, knives, regions</small>
+                <span class="pill">Pro</span>
+              </div>
+              <div class="command">
+                <code>/topup</code>
+                <small>Add balance with card or crypto</small>
+                <span class="pill">Fast</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="shell">
+          <div class="section-head reveal">
+            <div>
+              <p class="section-kicker">Built for Discord</p>
+              <h2>Clean tools for buying, checking, and managing accounts.</h2>
+            </div>
+            <p class="section-copy">
+              ClearVault keeps the important actions inside Discord while giving members a sharp,
+              easy-to-scan home page that matches the bot experience.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-icon">01</div>
+              <h3>Market Browser</h3>
+              <p>Browse supported platforms from Discord and jump into filtered results without messy menus.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon">02</div>
+              <h3>Topups and Balance</h3>
+              <p>Card and crypto topups connect to member balances so purchases feel quick and direct.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon">03</div>
+              <h3>Locker Previews</h3>
+              <p>Fortnite and Valorant previews turn account inventory into polished shareable visuals.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon">04</div>
+              <h3>Support Mode</h3>
+              <p>Staff can review account details when a customer enables temporary support access.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon">05</div>
+              <h3>Booster Perks</h3>
+              <p>Server boosters get bonus balance options and room for premium perks as the community grows.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon">06</div>
+              <h3>Owned Accounts</h3>
+              <p>Members can view purchases, retrieve details, request refunds, and keep their orders organized.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="market-band" id="markets">
+        <div class="shell">
+          <div class="section-head reveal">
+            <div>
+              <p class="section-kicker">Market coverage</p>
+              <h2>One Discord, multiple account categories.</h2>
+            </div>
+            <p class="section-copy">
+              The page uses ClearVault's real Fortnite and Valorant art in the background, with clean cards for
+              every category the bot already supports.
+            </p>
+          </div>
+
+          <div class="platform-grid">
+            <article class="platform-card fortnite">
+              <span class="platform-label">Fortnite</span>
+              <h3>FA accounts</h3>
+              <p>Item filters, skins, pickaxes, emotes, gliders, V-Bucks, level, and OG highlights.</p>
+            </article>
+            <article class="platform-card valorant">
+              <span class="platform-label">Valorant</span>
+              <h3>Region search</h3>
+              <p>Skins, knives, buddies, agents, VP, rank, and clean inventory preview reports.</p>
+            </article>
+            <article class="platform-card minecraft">
+              <span class="platform-label">Minecraft</span>
+              <h3>Java and Bedrock</h3>
+              <p>Edition filters, Hypixel details, capes, name-change status, and account checks.</p>
+            </article>
+            <article class="platform-card steam">
+              <span class="platform-label">Steam</span>
+              <h3>Game accounts</h3>
+              <p>Rust, CS2, Rocket League, Call of Duty, inventory value, hours, and ban signals.</p>
+            </article>
+            <article class="platform-card discord-market">
+              <span class="platform-label">Discord</span>
+              <h3>Nitro accounts</h3>
+              <p>Discord account listings with Nitro status and available boost information.</p>
+            </article>
+            <article class="platform-card vpn">
+              <span class="platform-label">VPN</span>
+              <h3>Privacy tools</h3>
+              <p>Supported VPN categories for members who need utility accounts alongside game markets.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="commands">
+        <div class="shell workflow">
+          <div>
+            <div class="section-head reveal">
+              <div>
+                <p class="section-kicker">Command flow</p>
+                <h2>Everything starts in the server.</h2>
+              </div>
+            </div>
+
+            <div class="command-grid">
+              <article class="command-card">
+                <code>/topup</code>
+                <h3>Add balance</h3>
+                <p>Create card or crypto invoices and apply available booster bonuses.</p>
+              </article>
+              <article class="command-card">
+                <code>/market</code>
+                <h3>Open the market</h3>
+                <p>Browse supported categories and move into platform-specific searches.</p>
+              </article>
+              <article class="command-card">
+                <code>/staffview</code>
+                <h3>Enable support</h3>
+                <p>Let ranked staff review one owned account for support and refund help.</p>
+              </article>
+              <article class="command-card">
+                <code>/owned</code>
+                <h3>Manage purchases</h3>
+                <p>Review owned accounts, details, warranty status, and available actions.</p>
+              </article>
+            </div>
+          </div>
+
+          <aside class="preview-stack" aria-label="ClearVault animated inventory preview">
+            <div class="preview-card">
+              <p class="section-kicker">Inventory preview</p>
+              <h3>ClearVault reports look sharp before members commit.</h3>
+              <div class="preview-metrics">
+                <div>
+                  <strong>Skins</strong>
+                  <span>Clean counts</span>
+                </div>
+                <div>
+                  <strong>Value</strong>
+                  <span>Price signals</span>
+                </div>
+                <div>
+                  <strong>Risk</strong>
+                  <span>Status checks</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="cta-band">
+        <div class="shell cta-layout">
+          <div>
+            <p class="section-kicker">Ready when the server is</p>
+            <h2>Join ClearVault and run the market from Discord.</h2>
+          </div>
+          <a class="button primary" href="https://discord.gg/clear" target="_blank" rel="noreferrer">Open discord.gg/clear</a>
+        </div>
+      </section>
     </main>
+
     <footer>
-        <p>&copy; 2025 xmarket. All rights reserved. | <a href="tos.html" style="color: #1e90ff;">Terms of Service</a></p>
+      <div class="shell footer-inner">
+        <span>ClearVault Discord</span>
+        <span>Market, topups, previews, support, and refunds in one server.</span>
+      </div>
     </footer>
-</body>
+
+    <script>
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      document
+        .querySelectorAll(".reveal, .feature-card, .platform-card, .command-card")
+        .forEach((node, index) => {
+          node.style.transitionDelay = `${Math.min(index * 45, 260)}ms`;
+          revealObserver.observe(node);
+        });
+    </script>
+  </body>
 </html>
