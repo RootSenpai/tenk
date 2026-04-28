@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#071014">
-    <title>ClearVault Discord</title>
+    <title>ClearVault Digital Services</title>
     <style>
       :root {
         --bg: #071014;
@@ -614,39 +614,39 @@
         background: linear-gradient(180deg, transparent 8%, rgba(0, 0, 0, 0.84) 70%);
       }
 
-      .platform-card.fortnite {
+      .platform-card.category-primary {
         background:
           radial-gradient(ellipse at 58% 0%, rgba(0, 217, 245, 0.30), transparent 62%),
           linear-gradient(135deg, rgba(0, 217, 245, 0.16), rgba(7, 16, 20, 0.90)),
           rgba(255, 255, 255, 0.06);
       }
 
-      .platform-card.valorant {
+      .platform-card.category-report {
         background:
           radial-gradient(ellipse at 55% 0%, rgba(255, 93, 115, 0.32), transparent 62%),
           linear-gradient(135deg, rgba(255, 93, 115, 0.17), rgba(7, 16, 20, 0.90)),
           rgba(255, 255, 255, 0.06);
       }
 
-      .platform-card.minecraft {
+      .platform-card.category-utility {
         background:
           linear-gradient(135deg, rgba(33, 209, 139, 0.28), rgba(7, 16, 20, 0.84)),
           rgba(255, 255, 255, 0.06);
       }
 
-      .platform-card.steam {
+      .platform-card.category-library {
         background:
           linear-gradient(135deg, rgba(0, 217, 245, 0.24), rgba(7, 16, 20, 0.86)),
           rgba(255, 255, 255, 0.06);
       }
 
-      .platform-card.discord-market {
+      .platform-card.category-community {
         background:
           linear-gradient(135deg, rgba(88, 101, 242, 0.36), rgba(7, 16, 20, 0.86)),
           rgba(255, 255, 255, 0.06);
       }
 
-      .platform-card.vpn {
+      .platform-card.category-privacy {
         background:
           linear-gradient(135deg, rgba(241, 201, 75, 0.28), rgba(7, 16, 20, 0.86)),
           rgba(255, 255, 255, 0.06);
@@ -765,6 +765,64 @@
         font-size: 0.78rem;
       }
 
+      .policy-band {
+        background:
+          linear-gradient(180deg, rgba(12, 23, 24, 0.98), rgba(7, 16, 20, 0.98)),
+          linear-gradient(90deg, rgba(0, 217, 245, 0.09), rgba(241, 201, 75, 0.08), rgba(255, 93, 115, 0.08));
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .policy-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .policy-card {
+        min-height: 190px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .policy-card strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        margin-bottom: 18px;
+        border-radius: 8px;
+        color: #061014;
+        background: var(--gold);
+        font-size: 0.9rem;
+      }
+
+      .policy-card:nth-child(2) strong,
+      .policy-card:nth-child(5) strong {
+        background: var(--brand);
+      }
+
+      .policy-card:nth-child(3) strong,
+      .policy-card:nth-child(6) strong {
+        color: #fff;
+        background: var(--red);
+      }
+
+      .policy-card p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .policy-card a {
+        color: #e9feff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
       .cta-band {
         padding: 76px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.10);
@@ -876,7 +934,8 @@
         }
 
         .feature-grid,
-        .platform-grid {
+        .platform-grid,
+        .policy-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
@@ -944,7 +1003,8 @@
 
         .feature-grid,
         .platform-grid,
-        .command-grid {
+        .command-grid,
+        .policy-grid {
           grid-template-columns: 1fr;
         }
 
@@ -983,9 +1043,11 @@
           <span>ClearVault</span>
         </a>
         <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#markets">Markets</a>
+          <a href="#features">Services</a>
+          <a href="#markets">Catalog</a>
           <a href="#commands">Commands</a>
+          <a href="#policies">Policies</a>
+          <a href="tos.html">Terms</a>
           <a href="https://discord.gg/clear" target="_blank" rel="noreferrer">Join Discord</a>
         </div>
       </nav>
@@ -995,12 +1057,12 @@
       <section class="hero">
         <div class="shell">
           <div class="hero-content reveal">
-            <p class="eyebrow">Discord marketplace live at discord.gg/clear</p>
+            <p class="eyebrow">Digital services delivered through Discord</p>
             <h1>ClearVault</h1>
             <p class="hero-copy">
-              A cleaner home for the ClearVault Discord: fast market browsing, balance topups,
-              account previews, support access, refunds, booster perks, and polished game inventory
-              reports all built around the server.
+              ClearVault is a Discord-based digital storefront for game-related digital products, utility
+              services, preview reports, order support, booster perks, refunds, and checkout help. Purchases
+              are delivered digitally through the ClearVault server after payment review.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="https://discord.gg/clear" target="_blank" rel="noreferrer">Join ClearVault</a>
@@ -1009,15 +1071,15 @@
             <div class="status-row" aria-label="ClearVault feature highlights">
               <div class="status">
                 <strong>24/7</strong>
-                <span>Discord access</span>
+                <span>Discord delivery</span>
               </div>
               <div class="status">
                 <strong>6+</strong>
-                <span>Market categories</span>
+                <span>Service categories</span>
               </div>
               <div class="status">
-                <strong>FA</strong>
-                <span>Account filters</span>
+                <strong>24h</strong>
+                <span>Warranty window</span>
               </div>
               <div class="status">
                 <strong>Live</strong>
@@ -1034,22 +1096,22 @@
             <div class="command-list">
               <div class="command">
                 <code>/market</code>
-                <small>Browse all platforms</small>
+                <small>Browse digital listings</small>
                 <span class="pill">Core</span>
               </div>
               <div class="command">
-                <code>/fortnite</code>
-                <small>Search by items and stats</small>
+                <code>/catalog</code>
+                <small>Search by details and stats</small>
                 <span class="pill">OG</span>
               </div>
               <div class="command">
-                <code>/valorant</code>
-                <small>Filter skins, knives, regions</small>
+                <code>/filter</code>
+                <small>Filter items, regions, details</small>
                 <span class="pill">Pro</span>
               </div>
               <div class="command">
-                <code>/topup</code>
-                <small>Add balance with card or crypto</small>
+                <code>/checkout</code>
+                <small>Start secure checkout</small>
                 <span class="pill">Fast</span>
               </div>
             </div>
@@ -1062,7 +1124,7 @@
           <div class="section-head reveal">
             <div>
               <p class="section-kicker">Built for Discord</p>
-              <h2>Clean tools for buying, checking, and managing accounts.</h2>
+              <h2>Clean tools for buying, checking, and managing digital orders.</h2>
             </div>
             <p class="section-copy">
               ClearVault keeps the important actions inside Discord while giving members a sharp,
@@ -1073,32 +1135,32 @@
           <div class="feature-grid">
             <article class="feature-card">
               <div class="feature-icon">01</div>
-              <h3>Market Browser</h3>
+              <h3>Catalog Browser</h3>
               <p>Browse supported platforms from Discord and jump into filtered results without messy menus.</p>
             </article>
             <article class="feature-card">
               <div class="feature-icon">02</div>
-              <h3>Topups and Balance</h3>
-              <p>Card and crypto topups connect to member balances so purchases feel quick and direct.</p>
+              <h3>Order Tracking</h3>
+              <p>Delivery status, support history, and receipt details stay organized for each purchase.</p>
             </article>
             <article class="feature-card">
               <div class="feature-icon">03</div>
               <h3>Locker Previews</h3>
-              <p>Fortnite and Valorant previews turn account inventory into polished shareable visuals.</p>
+              <p>Preview reports turn digital product details into polished shareable visuals before checkout.</p>
             </article>
             <article class="feature-card">
               <div class="feature-icon">04</div>
               <h3>Support Mode</h3>
-              <p>Staff can review account details when a customer enables temporary support access.</p>
+              <p>Staff can review order details when a customer enables temporary support access.</p>
             </article>
             <article class="feature-card">
               <div class="feature-icon">05</div>
               <h3>Booster Perks</h3>
-              <p>Server boosters get bonus balance options and room for premium perks as the community grows.</p>
+              <p>Server boosters get promotional checkout perks and room for premium benefits as the community grows.</p>
             </article>
             <article class="feature-card">
               <div class="feature-icon">06</div>
-              <h3>Owned Accounts</h3>
+              <h3>Order Hub</h3>
               <p>Members can view purchases, retrieve details, request refunds, and keep their orders organized.</p>
             </article>
           </div>
@@ -1109,45 +1171,45 @@
         <div class="shell">
           <div class="section-head reveal">
             <div>
-              <p class="section-kicker">Market coverage</p>
-              <h2>One Discord, multiple account categories.</h2>
+              <p class="section-kicker">Catalog coverage</p>
+              <h2>One Discord, multiple digital service categories.</h2>
             </div>
             <p class="section-copy">
-              The page uses ClearVault's real Fortnite and Valorant art in the background, with clean cards for
-              every category the bot already supports.
+              ClearVault keeps the catalog organized with clean cards for every supported digital product and
+              utility category.
             </p>
           </div>
 
           <div class="platform-grid">
-            <article class="platform-card fortnite">
-              <span class="platform-label">Fortnite</span>
-              <h3>FA accounts</h3>
-              <p>Item filters, skins, pickaxes, emotes, gliders, V-Bucks, level, and OG highlights.</p>
+            <article class="platform-card category-primary">
+              <span class="platform-label">Gaming</span>
+              <h3>Digital listings</h3>
+              <p>Filter lawful, transferable digital products by visible details, status, region, and value signals.</p>
             </article>
-            <article class="platform-card valorant">
-              <span class="platform-label">Valorant</span>
-              <h3>Region search</h3>
-              <p>Skins, knives, buddies, agents, VP, rank, and clean inventory preview reports.</p>
+            <article class="platform-card category-report">
+              <span class="platform-label">Reports</span>
+              <h3>Preview tools</h3>
+              <p>Review product details, included items, region information, and clean preview reports before purchase.</p>
             </article>
-            <article class="platform-card minecraft">
-              <span class="platform-label">Minecraft</span>
-              <h3>Java and Bedrock</h3>
-              <p>Edition filters, Hypixel details, capes, name-change status, and account checks.</p>
+            <article class="platform-card category-utility">
+              <span class="platform-label">Utility</span>
+              <h3>Access tools</h3>
+              <p>Browse supported utility products with delivery notes, restrictions, and compatibility details.</p>
             </article>
-            <article class="platform-card steam">
-              <span class="platform-label">Steam</span>
-              <h3>Game accounts</h3>
-              <p>Rust, CS2, Rocket League, Call of Duty, inventory value, hours, and ban signals.</p>
+            <article class="platform-card category-library">
+              <span class="platform-label">Libraries</span>
+              <h3>Digital bundles</h3>
+              <p>Compare lawful digital bundles by included products, usage notes, delivery status, and support signals.</p>
             </article>
-            <article class="platform-card discord-market">
-              <span class="platform-label">Discord</span>
-              <h3>Nitro accounts</h3>
-              <p>Discord account listings with Nitro status and available boost information.</p>
+            <article class="platform-card category-community">
+              <span class="platform-label">Community</span>
+              <h3>Member perks</h3>
+              <p>View eligible server promotions, support perks, and checkout benefits shown before purchase.</p>
             </article>
-            <article class="platform-card vpn">
-              <span class="platform-label">VPN</span>
-              <h3>Privacy tools</h3>
-              <p>Supported VPN categories for members who need utility accounts alongside game markets.</p>
+            <article class="platform-card category-privacy">
+              <span class="platform-label">Privacy</span>
+              <h3>Utility services</h3>
+              <p>Supported privacy and utility categories include clear restrictions, delivery notes, and support terms.</p>
             </article>
           </div>
         </div>
@@ -1165,24 +1227,24 @@
 
             <div class="command-grid">
               <article class="command-card">
-                <code>/topup</code>
-                <h3>Add balance</h3>
-                <p>Create card or crypto invoices and apply available booster bonuses.</p>
+                <code>/checkout</code>
+                <h3>Start checkout</h3>
+                <p>Create checkout invoices and apply available promotional bonuses.</p>
               </article>
               <article class="command-card">
                 <code>/market</code>
-                <h3>Open the market</h3>
+                <h3>Open the catalog</h3>
                 <p>Browse supported categories and move into platform-specific searches.</p>
               </article>
               <article class="command-card">
                 <code>/staffview</code>
                 <h3>Enable support</h3>
-                <p>Let ranked staff review one owned account for support and refund help.</p>
+                <p>Let ranked staff review one order for support and refund help.</p>
               </article>
               <article class="command-card">
                 <code>/owned</code>
                 <h3>Manage purchases</h3>
-                <p>Review owned accounts, details, warranty status, and available actions.</p>
+                <p>Review purchases, delivery details, warranty status, and available actions.</p>
               </article>
             </div>
           </div>
@@ -1193,7 +1255,7 @@
               <h3>ClearVault reports look sharp before members commit.</h3>
               <div class="preview-metrics">
                 <div>
-                  <strong>Skins</strong>
+                  <strong>Details</strong>
                   <span>Clean counts</span>
                 </div>
                 <div>
@@ -1210,6 +1272,54 @@
         </div>
       </section>
 
+      <section class="policy-band" id="policies">
+        <div class="shell">
+          <div class="section-head reveal">
+            <div>
+              <p class="section-kicker">Checkout policies</p>
+              <h2>Clear terms before payment.</h2>
+            </div>
+            <p class="section-copy">
+              ClearVault publishes the details customers need before buying: what is sold,
+              how it is delivered, how to get help, and when warranty, refunds, or cancellations apply.
+            </p>
+          </div>
+
+          <div class="policy-grid">
+            <article class="policy-card">
+              <strong>01</strong>
+              <h3>Business and Support</h3>
+              <p>Business name: ClearVault. Customer service is available through Discord tickets at <a href="https://discord.gg/clear" target="_blank" rel="noreferrer">discord.gg/clear</a> and by email at <a href="mailto:support@xmarketz.xyz">support@xmarketz.xyz</a>.</p>
+            </article>
+            <article class="policy-card">
+              <strong>02</strong>
+              <h3>Digital Products</h3>
+              <p>ClearVault offers digital products only when we reasonably believe they are lawful, transferable, and allowed for sale.</p>
+            </article>
+            <article class="policy-card">
+              <strong>03</strong>
+              <h3>Delivery and Warranty</h3>
+              <p>No physical goods are shipped. Eligible purchases are delivered through Discord. Report delivery or functionality issues within the 24-hour warranty window.</p>
+            </article>
+            <article class="policy-card">
+              <strong>04</strong>
+              <h3>Refunds and Disputes</h3>
+              <p>All sales are final unless covered by warranty or required by law. Clear video evidence may be required before replacement or refund review.</p>
+            </article>
+            <article class="policy-card">
+              <strong>05</strong>
+              <h3>Returns and Cancellations</h3>
+              <p>Digital products cannot be physically returned. Orders may be cancelled before digital delivery begins.</p>
+            </article>
+            <article class="policy-card">
+              <strong>06</strong>
+              <h3>Restrictions and Promotions</h3>
+              <p>Products are unavailable where prohibited. Booster bonuses and promotions apply only when shown in Discord or at checkout.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="cta-band">
         <div class="shell cta-layout">
           <div>
@@ -1223,8 +1333,8 @@
 
     <footer>
       <div class="shell footer-inner">
-        <span>ClearVault Discord</span>
-        <span>Market, topups, previews, support, and refunds in one server.</span>
+        <span>ClearVault Digital Services</span>
+        <span><a href="tos.html">Terms &amp; Policies</a> | <a href="mailto:support@xmarketz.xyz">support@xmarketz.xyz</a></span>
       </div>
     </footer>
 
