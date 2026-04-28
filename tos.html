@@ -1,83 +1,383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - xmarket</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#071014">
+    <title>Terms &amp; Policies - ClearVault</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #121212;
-            color: #f5f5f5;
+      :root {
+        --bg: #071014;
+        --panel: rgba(255, 255, 255, 0.06);
+        --line: rgba(255, 255, 255, 0.13);
+        --text: #f5fbfc;
+        --muted: #a8bdc2;
+        --brand: #00d9f5;
+        --gold: #f1c94b;
+        --red: #ff5d73;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background:
+          linear-gradient(135deg, rgba(0, 217, 245, 0.14), transparent 30rem),
+          linear-gradient(225deg, rgba(255, 93, 115, 0.12), transparent 28rem),
+          var(--bg);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        width: min(960px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+        background: rgba(7, 16, 20, 0.84);
+        backdrop-filter: blur(18px);
+      }
+
+      nav {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .brand {
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: var(--muted);
+        font-weight: 750;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      main {
+        padding: 72px 0;
+      }
+
+      .intro {
+        margin-bottom: 28px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--brand);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 6vw, 5rem);
+        line-height: 0.96;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 720px;
+        margin: 20px 0 0;
+        color: #d4e5e8;
+        font-size: 1.06rem;
+        line-height: 1.68;
+      }
+
+      .policy-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      section {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      ul {
+        margin: 12px 0 0;
+        padding-left: 20px;
+      }
+
+      .notice {
+        border-color: rgba(241, 201, 75, 0.35);
+        background: rgba(241, 201, 75, 0.08);
+      }
+
+      .notice strong {
+        color: var(--gold);
+      }
+
+      .contact {
+        border-color: rgba(0, 217, 245, 0.32);
+      }
+
+      .danger {
+        border-color: rgba(255, 93, 115, 0.28);
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+        font-weight: 850;
+      }
+
+      .button.primary {
+        border-color: rgba(0, 217, 245, 0.54);
+        color: #041113;
+        background: linear-gradient(135deg, rgba(0, 217, 245, 0.98), rgba(33, 209, 139, 0.95));
+      }
+
+      footer {
+        padding: 26px 0;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(3, 8, 10, 0.72);
+      }
+
+      @media (max-width: 680px) {
+        nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 0;
         }
-        h1 {
-            color: #1e90ff;
-            text-align: center;
+
+        main {
+          padding: 48px 0;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #1e1e1e;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+        section {
+          padding: 18px;
         }
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Terms of Service</h1>
-        <p>By using xmarket, you agree to these Terms of Service. Please read them carefully.</p>
-        
-        <section>
-            <h2>1. General Terms</h2>
-            <p>xmarket provides a platform for automated digital service delivery. By accessing or using our services, you accept and agree to these terms.</p>
-        </section>
-        
-        <section>
-            <h2>2. Warranty & Support</h2>
-            <p>2.1. We provide a <strong>24-hour warranty</strong> for technical support and service functionality.</p>
-            <p>2.2. This warranty only applies if the issue is reported within 24 hours of purchase.</p>
-            <p>2.3. The warranty does not cover misuse, modifications, or actions taken outside of xmarket.</p>
-        </section>
-        
-        <section>
-            <h2>3. Refund Policy</h2>
-            <p>3.1. Refunds are only issued if the service does not function as described and is reported within the warranty period.</p>
-            <p>3.2. Refunds will be credited back to your xmarket balance. Refunds to original payment methods (e.g., credit card, crypto) are granted only in exceptional cases.</p>
-        </section>
-        
-        <section>
-            <h2>4. Prohibited Use</h2>
-            <p>4.1. You may not use xmarket services for unlawful activities, fraud, or violating third-party platform policies.</p>
-            <p>4.2. xmarket reserves the right to refuse service to users found in violation of these terms.</p>
-        </section>
-        
-        <section>
-            <h2>5. Amendments</h2>
-            <p>5.1. We may update these terms at any time. Continued use of xmarket constitutes acceptance of updated terms.</p>
+  </head>
+  <body>
+    <header>
+      <nav class="shell" aria-label="Terms navigation">
+        <a class="brand" href="index.html">ClearVault</a>
+        <div class="nav-links">
+          <a href="index.html#features">Services</a>
+          <a href="index.html#policies">Policies</a>
+          <a href="https://discord.gg/clear" target="_blank" rel="noreferrer">Discord</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <div class="intro">
+        <p class="eyebrow">Last updated 28 April 2026</p>
+        <h1>Terms &amp; Policies</h1>
+        <p class="lede">
+          By purchasing from ClearVault, you agree to these Terms of Service. These terms govern ClearVault's
+          sale of game-related digital products, utility services, preview reports, and related digital
+          products delivered through Discord.
+        </p>
+      </div>
+
+      <div class="policy-list">
+        <section class="contact">
+          <h2>1. Business and Customer Service</h2>
+          <p>
+            Business name: ClearVault. Customer support is available through Discord tickets at
+            <a href="https://discord.gg/clear" target="_blank" rel="noreferrer">discord.gg/clear</a>
+            and by email at <a href="mailto:support@xmarketz.xyz">support@xmarketz.xyz</a>. We aim to review
+            support requests within 24 to 48 hours.
+          </p>
         </section>
 
         <section>
-            <h2>6. Privacy Notice</h2>
-            <p>6.1. We value your privacy and are committed to protecting your personal information. By using our services, you consent to the collection and processing of personal data in accordance with this Privacy Notice.</p>
-            <p>6.2. The information we collect may include, but is not limited to, your name, email address, payment details, and usage data.</p>
-            <p>6.3. We use your personal information to provide, improve, and personalize our services. We do not share or sell your personal data to third parties without your consent, except as required by law or to fulfill contractual obligations.</p>
-            <p>6.4. You have the right to access, update, or delete your personal information. For more details, please contact us at <a href="mailto:support@xmarket.com">support@xmarket.com</a>.</p>
-            <p>6.5. We may update this Privacy Notice from time to time, and we will notify you of any significant changes. Continued use of our services after changes are made signifies your acceptance of the updated Privacy Notice.</p>
+          <h2>2. Digital Product Sales</h2>
+          <p>
+            ClearVault offers digital products only when we reasonably believe they are lawful, transferable,
+            and allowed for sale. We remove or refuse products we believe are unlawful or not permitted for
+            sale. Customers are responsible for reviewing product details before purchase and for complying
+            with applicable third-party platform rules.
+          </p>
+          <p>
+            Product details, restrictions, delivery notes, and pricing are shown in Discord before checkout.
+            Commands are private to the customer using them.
+          </p>
         </section>
-        
-        <p>For any inquiries, contact us at <a href="mailto:support@xmarket.com">support@xmarket.com</a>.</p>
-        <p><a href="index.html">Back to Home</a></p>
-    </div>
-</body>
+
+        <section>
+          <h2>3. Digital Delivery</h2>
+          <p>
+            No physical goods are shipped. Eligible purchases are delivered digitally through Discord messages,
+            tickets, or bot flows after checkout and payment review. Delivery timing can vary by product,
+            payment review, and staff availability.
+          </p>
+        </section>
+
+        <section>
+          <h2>4. Warranty Policy</h2>
+          <p>
+            ClearVault provides a 24-hour warranty for technical support and product functionality. The
+            warranty covers non-functional product data or products that do not match the listing shown at
+            checkout. Eligible remedies may include replacement or refund review.
+          </p>
+          <p>
+            The warranty is void if product details are shared, delivery details are modified after delivery,
+            unapproved software is used, or the issue is caused by customer actions outside ClearVault.
+            ClearVault is not responsible for issues caused by platform policy changes or customer actions
+            after the warranty period.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Refund and Dispute Policy</h2>
+          <p>
+            All sales are final unless covered by the warranty or required by law. Refunds are not issued for
+            customer actions after purchase. Refund requests must be made within the 24-hour warranty period,
+            unless a longer period is required by law or payment provider rules.
+          </p>
+          <p>
+            A refund may be approved if the product does not function as described and support cannot resolve
+            the issue. Customers must not modify delivery details before ClearVault investigates the reported
+            issue.
+          </p>
+          <p>
+            Customers must provide clear video evidence showing the purchase, attempted use of the digital
+            item, and the issue encountered. Refund requests may be rejected if sufficient evidence is not
+            provided.
+          </p>
+          <p>
+            Product issues caused by third-party platform systems, policy changes, outages, enforcement
+            decisions, or customer violations are outside ClearVault's control and are not refundable unless
+            required by law or payment provider rules. Products valued under $1 are not refundable unless
+            required by law.
+          </p>
+          <p>
+            Approved refunds may be returned to the original payment method or handled another way when
+            agreed with the customer and allowed by payment provider rules. Refund method, timing, and
+            availability are subject to payment provider rules, processing times, and fraud-prevention checks.
+          </p>
+          <p>
+            Please contact support before opening a payment dispute so we can review delivery logs and resolve
+            the issue quickly.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Returns and Cancellations</h2>
+          <p>
+            Digital services cannot be physically returned. An order may be cancelled before digital delivery
+            begins. After delivery or use, the refund and warranty policy above applies.
+          </p>
+        </section>
+
+        <section class="notice">
+          <h2>7. Payments and Card Statements</h2>
+          <p>
+            Payments may be processed by Stripe or another provider shown at checkout. Your card statement
+            will show the descriptor displayed by the payment provider for the transaction. Contact support
+            if you do not recognize a charge.
+          </p>
+        </section>
+
+        <section class="danger">
+          <h2>8. Legal and Use Restrictions</h2>
+          <p>
+            You may not use ClearVault for unlawful activity, fraud, abuse, spam, infringement, or violations
+            of third-party rights. Services are unavailable where prohibited by law, sanctions, export controls,
+            payment network rules, or provider restrictions. ClearVault is independent and is not endorsed by
+            any game publisher, platform owner, software provider, network provider, or utility provider unless
+            stated in writing.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Promotions and Booster Perks</h2>
+          <p>
+            Promotions, discounts, and booster bonuses apply only when shown in Discord or at checkout. They
+            have no cash value, may expire, may be limited to certain digital services, and may be changed
+            for future orders.
+          </p>
+        </section>
+
+        <section>
+          <h2>10. Privacy Notice</h2>
+          <p>
+            ClearVault collects the information needed to provide service, process payments, prevent abuse,
+            and handle support. This may include Discord user details, order history, support messages, email
+            address, payment status, and usage data. Full card numbers are handled by the payment provider
+            and are not stored by ClearVault.
+          </p>
+          <p>
+            We do not sell personal data. We may share limited information with service providers, payment
+            processors, fraud-prevention tools, or authorities when required to operate the service or comply
+            with law. To request access, correction, or deletion, contact
+            <a href="mailto:support@xmarketz.xyz">support@xmarketz.xyz</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>11. Changes</h2>
+          <p>
+            ClearVault may update these terms and policies as the service changes. Continued use after an
+            update means you accept the updated terms.
+          </p>
+        </section>
+      </div>
+
+      <div class="button-row">
+        <a class="button primary" href="index.html">Back to ClearVault</a>
+        <a class="button" href="https://discord.gg/clear" target="_blank" rel="noreferrer">Open Discord</a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="shell">ClearVault Digital Services | support@xmarketz.xyz</div>
+    </footer>
+  </body>
 </html>
