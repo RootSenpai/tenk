@@ -4,7 +4,6 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "build:pages": "nuxt build --preset github_pages",
     "obfuscate": "javascript-obfuscator .output/public/_nuxt --output .output/public/_nuxt --compact true --self-defending true",
     "build:full": "nuxt build && npm run obfuscate",
     "dev": "nuxt dev",

@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-01',
-  devtools: { enabled: process.env.NODE_ENV === 'development' },
+  devtools: { enabled: true },
 
   modules: [],
 
@@ -19,7 +19,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       title: 'ClearVault — Digital Services Through Discord',
       meta: [
