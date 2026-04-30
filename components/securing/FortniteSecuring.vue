@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-5 max-w-4xl">
+  <div class="space-y-5 max-w-4xl mx-auto">
 
     <div class="relative rounded-2xl border border-white/8 bg-surface overflow-hidden">
       <img
