@@ -10,7 +10,7 @@
       aria-hidden="true"
       src="https://fortnite-api.com/images/cosmetics/br/character_quichelorrainelime/featured.png"
       alt=""
-      class="absolute bottom-0 left-0 sm:left-2 md:left-6 lg:left-10 h-[40vh] sm:h-[55vh] md:h-[65vh] xl:h-[78vh] w-auto object-contain object-bottom opacity-30 sm:opacity-40 select-none pointer-events-none"
+      class="absolute bottom-0 -left-4 h-auto max-h-[38vh] w-[42vw] max-w-[11rem] object-contain object-bottom opacity-20 sm:left-2 sm:h-[55vh] sm:max-h-none sm:w-auto sm:max-w-none sm:opacity-40 md:left-6 md:h-[65vh] lg:left-10 xl:h-[78vh] select-none pointer-events-none"
       style="mask-image: linear-gradient(to top, transparent 0%, black 25%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);"
     />
 
@@ -18,7 +18,7 @@
       aria-hidden="true"
       src="https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/fullportrait.png"
       alt=""
-      class="absolute bottom-0 right-0 sm:right-2 md:right-6 lg:right-10 h-[42vh] sm:h-[58vh] md:h-[68vh] xl:h-[82vh] w-auto object-contain object-bottom opacity-30 sm:opacity-40 select-none pointer-events-none"
+      class="absolute bottom-0 -right-4 h-auto max-h-[40vh] w-[42vw] max-w-[11rem] object-contain object-bottom opacity-20 sm:right-2 sm:h-[58vh] sm:max-h-none sm:w-auto sm:max-w-none sm:opacity-40 md:right-6 md:h-[68vh] lg:right-10 xl:h-[82vh] select-none pointer-events-none"
       style="mask-image: linear-gradient(to top, transparent 0%, black 25%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);"
     />
 
