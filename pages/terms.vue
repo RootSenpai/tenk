@@ -54,7 +54,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 md:px-12 pb-24">
-      <div class="max-w-4xl">
+      <div class="max-w-4xl mx-auto">
         <div class="rounded-2xl border border-white/6 bg-surface p-8">
           <div class="flex items-start gap-4 mb-8">
             <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
