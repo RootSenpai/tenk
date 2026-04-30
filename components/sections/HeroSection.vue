@@ -26,8 +26,8 @@
       <div class="mx-auto text-center lg:w-2/3 pt-12">
 
         <h1 class="font-[Syne] text-5xl font-bold text-white md:text-6xl xl:text-7xl anim-text-focus-in">
-          Your secure storefront for
-          <span class="gradient-text"> game accounts.</span>
+          Your secure marketplace for
+          <span class="gradient-text"> gaming accounts</span>
         </h1>
 
         <p class="mt-8 font-sans text-lg text-text-muted anim-fade-in-bottom" style="animation-delay: 0.6s">
